@@ -12,7 +12,7 @@ int Screen::xyToIndex(int x, int y){
 void Screen::draw(){
 	system("clear");
 	for (int x = 0; x < width; x++){
-		for (int y = 0; y < height; x++){
+		for (int y = 0; y < height; y++){
 			int index = xyToIndex(x,y);
 			char c = 0;
 			buffer[index] ? c = '#' : c = ' ';
@@ -24,16 +24,23 @@ void Screen::draw(){
 }
 
 void Screen::clearSquare(int x, int y) {
-	assert(x >= 0 && x < width);
-	assert(y >= 0 && y < height);
-	buffer[xyToIndex(x, y)] = false;
+	if (x < 0 || x >= width ||
+		y < 0 || y >= height){
+		
+		assert(x >= 0 && x < width);
+		assert(y >= 0 && y < height);
+		buffer[xyToIndex(x, y)] = false;
+	}
 }
 
 void Screen::fillSquare(int x, int y) {
-	assert(x >= 0 && x < width);
-	assert(y >= 0 && y < height);
-	buffer[xyToIndex(x, y)] = true;
-	
+	if (x >= 0 && x < width &&
+		y >= 0 && y < height){
+		
+		assert(x >= 0 && x < width);
+		assert(y >= 0 && y < height);
+		buffer[xyToIndex(x, y)] = true;
+	}
 }
 
 Screen::Screen(int height, int width) {

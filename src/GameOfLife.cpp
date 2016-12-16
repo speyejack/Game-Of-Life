@@ -6,9 +6,9 @@
 #include "Board.h"
 #include "Queue.h"
 #include <unistd.h>
-#define OFFSHIFT 5
+//#define OFFSHIFT 5
 
-#define SIZE 10
+#define SIZE 5
 class GameOfLife {
 private:
 	Queue *curr_alive;
@@ -92,15 +92,12 @@ void GameOfLife::evalSquare(int x, int y) {
 }
 
 void GameOfLife::tick() {
-	//board->clearSquare(4, 2);
 	ListNode *n = curr_alive->getFirst();
 	while (n != NULL) {
 
-		//std::cout << n->pos[0] << ":" << n->pos[1] << "\n";
 		evalSquare(n->pos[0], n->pos[1]);
 		n = n->n;
 	}
-	//board->fillSquare(4, 2);
 
 	switchMaps();
 }
@@ -120,13 +117,16 @@ bool GameOfLife::getStatus(int x, int y){
 
 int main() {
 	GameOfLife* game = new GameOfLife();
+	game->birth(0,2);
+	game->birth(1,2);
+	game->birth(2,2);
 
 	/*
-	game.birth(7, 7);
-	game.birth(6, 7);
-	game.birth(8, 7);
-	game.birth(8, 6);
-	game.birth(7, 5);
+	game->birth(7, 7);
+	game->birth(6, 7);
+	game->birth(8, 7);
+	game->birth(8, 6);
+	game->birth(7, 5);
 	*/
 	/*
 	game->birth(7, 7);
@@ -135,7 +135,7 @@ int main() {
 	game->birth(8, 6);
 	game->birth(7, 5);
 	*/
-	
+	/*
 	game->birth(10 - OFFSHIFT, 12 - OFFSHIFT);
 	game->birth(14 - OFFSHIFT, 12 - OFFSHIFT);
 	game->birth(10 - OFFSHIFT, 11 - OFFSHIFT);
@@ -148,19 +148,14 @@ int main() {
 	game->birth(14 - OFFSHIFT, 14 - OFFSHIFT);
 	game->birth(12 - OFFSHIFT, 14 - OFFSHIFT);
 	game->birth(12 - OFFSHIFT, 10 - OFFSHIFT);
-
+	*/
 	//while (true) {
+	game->screen->draw();
 	for (int i = 0; i < 40; i++) {
-		usleep(100 * 1000);
-
 		game->tick();
 		game->screen->draw();
-	}
-	for (int x = 0; x < SIZE; x++) {
-		for (int y = 0; y < SIZE; y++) {
-			game->screen->clearSquare(x, y);
-
-		}
+		
+		usleep(100 * 1000);
 	}
 	delete game;
 }
