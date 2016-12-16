@@ -1,5 +1,6 @@
 #include "Screen.h"
 #include <assert.h>
+#include <stdio.h>
 #define WIDTH 15
 #define HEIGHT 15
 	
@@ -8,13 +9,13 @@ int Screen::xyToIndex(int x, int y){
 }
 
 void Screen::draw(){
-	std::system("clear");
+	system("clear");
 	for (int x = 0; x < width; x++){
 		for (int y = 0; y < height; x++){
 			int index = xyToIndex(x,y);
 			char c = 0;
 			buffer[index] ? c = '#' : c = ' ';
-			printf(c);
+			printf("%c", c);
 			buffer[index] = false;
 		}
 		printf("\n");
@@ -38,7 +39,7 @@ Screen::Screen(int height, int width) {
 	this->height = height;
 	this->width = width;
 	
-	buffer = new(sizeof(bool) * height * width);
+	buffer = new bool(sizeof(bool) * height * width);
 }
 
 Screen::~Screen() {

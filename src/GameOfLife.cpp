@@ -30,7 +30,7 @@ public:
 };
 
 GameOfLife::GameOfLife() {
-	screen = new Screen(SIZE);
+	screen = new Screen(SIZE, SIZE);
 	curr_alive = new Queue();
 	pred_alive = new Queue();
 	/*for (int x = 0; x < SIZE;x++) {
@@ -151,7 +151,7 @@ int main() {
 
 	//while (true) {
 	for (int i = 0; i < 40; i++) {
-		sleep(100);
+		system("sleep(0.100)");
 
 		game->tick();
 		
@@ -162,6 +162,5 @@ int main() {
 
 		}
 	}
-	sleep(10);
 	delete game;
 }
