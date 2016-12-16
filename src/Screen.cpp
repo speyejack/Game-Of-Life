@@ -1,46 +1,46 @@
 #include "Screen.h"
+#include <assert.h>
 #define WIDTH 15
 #define HEIGHT 15
 	
+int Screen::xyToIndex(int x, int y){
+	return y * this->height + x;
+}
 
-HRGN Screen::getRect(int x, int y) {
-	return CreateRectRgn(x*WIDTH + 1, y*HEIGHT + 1, (x + 1)*WIDTH-1, (y + 1)*HEIGHT-1);
+void Screen::draw(){
+	std::system("clear");
+	for (int x = 0; x < width; x++){
+		for (int y = 0; y < height; x++){
+			int index = xyToIndex(x,y);
+			char c = 0;
+			buffer[index] ? c = '#' : c = ' ';
+			printf(c);
+			buffer[index] = false;
+		}
+		printf("\n");
+	}
 }
 
 void Screen::clearSquare(int x, int y) {
-	HDC dc = GetDC(console);
-	FillRgn(dc, getRect(x, y), CreateSolidBrush(RGB(0, 0, 0)));
-
-	ReleaseDC(console, dc);
-	// FillRgn(dc, getRect(x, y));
+	assert(x >= 0 && x < width);
+	assert(y >= 0 && y < height);
+	buffer[xyToIndex(x, y)] = false;
 }
 
 void Screen::fillSquare(int x, int y) {
-	HDC dc = GetDC(console);
-	//Rectangle(dc, x*WIDTH+1, y*HEIGHT+1, (x + 1)*WIDTH-1, (y + 1)*HEIGHT-1);
-	FillRgn(dc, getRect(x, y), CreateSolidBrush(RGB(255, 255, 255)));
-
-	ReleaseDC(console, dc);
+	assert(x >= 0 && x < width);
+	assert(y >= 0 && y < height);
+	buffer[xyToIndex(x, y)] = true;
+	
 }
 
-Screen::Screen(int size) {
-	console = GetConsoleWindow();
-	ShowCursor(false);
-	HDC dc = GetDC(console);
-	for (int x = 0; x < size; x++) {
-		for (int y = 0; y < size; y++) {
-			RECT rec = { x*WIDTH, y*HEIGHT, (x + 1)*WIDTH, (y + 1)*HEIGHT };
-			DrawEdge(dc, &rec, BDR_SUNKENINNER, BF_RECT);
-		}
-	}
-	HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
-	CONSOLE_CURSOR_INFO info;
-	info.dwSize = 100;
-	info.bVisible = FALSE;
-	SetConsoleCursorInfo(consoleHandle, &info);
-	ReleaseDC(console, dc);
+Screen::Screen(int height, int width) {
+	this->height = height;
+	this->width = width;
+	
+	buffer = new(sizeof(bool) * height * width);
 }
 
 Screen::~Screen() {
-	//std::cin.ignore();
+	delete buffer;
 }

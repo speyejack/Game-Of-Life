@@ -119,8 +119,6 @@ bool GameOfLife::getStatus(int x, int y){
 }
 
 int main() {
-	//_CrtSetBreakAlloc(1000);
-	//_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 	GameOfLife* game = new GameOfLife();
 
 	/*
@@ -156,6 +154,7 @@ int main() {
 		sleep(100);
 
 		game->tick();
+		
 	}
 	for (int x = 0; x < SIZE; x++) {
 		for (int y = 0; y < SIZE; y++) {
@@ -165,6 +164,4 @@ int main() {
 	}
 	sleep(10);
 	delete game;
-	
-
 }
