@@ -1,5 +1,6 @@
-#include "stdafx.h"
 #include "RBTree.h"
+#include <stdlib.h>
+#include <stdio.h>
 #define BLACK 0
 #define RED 1
 

@@ -1,9 +1,7 @@
 // GameOfLife.cpp : Defines the entry point for the console application.
 //
 
-#include "stdafx.h"
 #include <iostream>
-#include <Windows.h>
 #include "Screen.h"
 #include "Board.h"
 #include "Queue.h"
@@ -124,10 +122,6 @@ int main() {
 	//_CrtSetBreakAlloc(1000);
 	//_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 	GameOfLife* game = new GameOfLife();
-	HDC screenDC = ::GetDC(0);
-	::Rectangle(screenDC, 0, 0, 10, 10);
-	ReleaseDC(0,screenDC);
-	std::cin.ignore();
 
 	/*
 	game.birth(7, 7);
@@ -156,12 +150,10 @@ int main() {
 	game->birth(14 - OFFSHIFT, 14 - OFFSHIFT);
 	game->birth(12 - OFFSHIFT, 14 - OFFSHIFT);
 	game->birth(12 - OFFSHIFT, 10 - OFFSHIFT);
-	std::cin.ignore();
 
 	//while (true) {
 	for (int i = 0; i < 40; i++) {
-		Sleep(100);
-		//std::cin.ignore();
+		sleep(100);
 
 		game->tick();
 	}
@@ -171,7 +163,7 @@ int main() {
 
 		}
 	}
-	Sleep(10);
+	sleep(10);
 	delete game;
 	
 

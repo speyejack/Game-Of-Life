@@ -1,5 +1,3 @@
-#include "stdafx.h"
-
 #include "Screen.h"
 #define WIDTH 15
 #define HEIGHT 15

@@ -12,6 +12,6 @@ public:
 	void queue(int pos[2]);
 	int * dequeue();
 	bool contains(int pos[2]);
-	ListNode * Queue::getFirst();
+	ListNode * getFirst();
 	~Queue();
 };
