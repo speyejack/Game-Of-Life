@@ -5,9 +5,10 @@
 #include "Screen.h"
 #include "Board.h"
 #include "Queue.h"
+#include <unistd.h>
 #define OFFSHIFT 5
 
-#define SIZE 30
+#define SIZE 10
 class GameOfLife {
 private:
 	Queue *curr_alive;
@@ -59,7 +60,6 @@ void GameOfLife::switchMaps() {
 }
 
 void GameOfLife::setPredDead(int x, int y) {
-	screen->clearSquare(x, y);
 	return;
 }
 
@@ -151,10 +151,10 @@ int main() {
 
 	//while (true) {
 	for (int i = 0; i < 40; i++) {
-		system("sleep(0.100)");
+		usleep(100 * 1000);
 
 		game->tick();
-		
+		game->screen->draw();
 	}
 	for (int x = 0; x < SIZE; x++) {
 		for (int y = 0; y < SIZE; y++) {

@@ -1,6 +1,7 @@
 #include "Screen.h"
 #include <assert.h>
 #include <stdio.h>
+#include <iostream>
 #define WIDTH 15
 #define HEIGHT 15
 	
@@ -39,7 +40,7 @@ Screen::Screen(int height, int width) {
 	this->height = height;
 	this->width = width;
 	
-	buffer = new bool(sizeof(bool) * height * width);
+	buffer = new bool[sizeof(bool) * height * width];
 }
 
 Screen::~Screen() {

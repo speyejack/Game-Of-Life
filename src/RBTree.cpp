@@ -51,7 +51,7 @@ void RBTree::rotateRight(TreeNode *root) {
 }
 
 void RBTree::insert(int num) {
-	TreeNode *n = new TreeNode();
+	TreeNode* n = new TreeNode();
 	n->color = RED;
 	n->value = num;
 	TreeNode *index = rootTree;
@@ -99,7 +99,7 @@ void RBTree::insert_case2(TreeNode *n) {
 }
 
 void RBTree::insert_case3(TreeNode *n) {
-	TreeNode * u = uncle(n);
+	TreeNode* u = uncle(n);
 	if ((u != NULL) && (u->color == RED)) {
 		n->parent->color = BLACK;
 		u->color = BLACK;
@@ -112,7 +112,7 @@ void RBTree::insert_case3(TreeNode *n) {
 }
 
 void RBTree::insert_case4(TreeNode *n) {
-	TreeNode * g = grandparent(n);
+	TreeNode* g = grandparent(n);
 	if (g == NULL)
 		return;
 	if ((n == n->parent->right) && (n->parent == g->left)) {
@@ -126,7 +126,7 @@ void RBTree::insert_case4(TreeNode *n) {
 }
 
 void RBTree::insert_case5(TreeNode *n) {
-	TreeNode *g = grandparent(n);
+	TreeNode* g = grandparent(n);
 	n->parent->color = BLACK;
 	g->color = RED;
 	if (n == n->parent->left)
@@ -136,7 +136,7 @@ void RBTree::insert_case5(TreeNode *n) {
 }
 
 bool RBTree::contains(int num) {
-	TreeNode *index = rootTree;
+	TreeNode* index = rootTree;
 	while (index != NULL) {
 		if (num == index->value)
 			return true;
@@ -149,7 +149,7 @@ bool RBTree::contains(int num) {
 }
 
 RBTree::RBTree(){
-
+	rootTree = NULL;
 }
 
 RBTree::~RBTree(){

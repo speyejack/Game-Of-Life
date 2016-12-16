@@ -6,6 +6,11 @@ struct TreeNode {
 	bool color;
 	int value;
 
+	TreeNode() {
+		parent = 0;
+		left = 0;
+		right = 0;
+	}
 	~TreeNode() {
 		delete left;
 		delete right;
