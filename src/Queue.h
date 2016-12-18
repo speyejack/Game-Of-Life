@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
 struct ListNode {
 	ListNode *n;
 	int pos[2];
@@ -13,5 +14,6 @@ public:
 	int * dequeue();
 	bool contains(int pos[2]);
 	ListNode * getFirst();
+	void write_to_stream(std::ostream&);
 	~Queue();
 };

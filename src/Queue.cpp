@@ -51,3 +51,17 @@ Queue::~Queue() {
 ListNode * Queue::getFirst() {
 	return first;
 }
+
+void Queue::write_to_stream(std::ostream& os){
+	ListNode* n = first;
+	os << "[";
+	while (n != NULL){
+		os << "{" << n->pos[0] << ", " << n->pos[1] << "},";
+	}
+	os << "]";
+}
+
+std::ostream& operator<<(std::ostream& os, Queue& q){
+	q.write_to_stream(os);
+	return os;
+}
