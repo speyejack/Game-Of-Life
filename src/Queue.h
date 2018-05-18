@@ -17,3 +17,5 @@ public:
 	void write_to_stream(std::ostream&);
 	~Queue();
 };
+
+std::ostream& operator<<(std::ostream& os, Queue& q);

@@ -57,6 +57,7 @@ void Queue::write_to_stream(std::ostream& os){
 	os << "[";
 	while (n != NULL){
 		os << "{" << n->pos[0] << ", " << n->pos[1] << "},";
+		n = n->n;
 	}
 	os << "]";
 }

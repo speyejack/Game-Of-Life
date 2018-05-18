@@ -28,6 +28,7 @@ public:
 
 	void tick();
 	void birth(int x, int y);
+	void print_alive();
 };
 
 GameOfLife::GameOfLife() {
@@ -69,7 +70,6 @@ void GameOfLife::setPredAlive(int x, int y) {
 		pred_alive->queue(pos);
 	}
 	pred_board->addPoint(x, y);
-	screen->fillSquare(x, y);
 }
 
 void GameOfLife::evalSquare(int x, int y) {
@@ -95,6 +95,7 @@ void GameOfLife::tick() {
 	ListNode *n = curr_alive->getFirst();
 	while (n != NULL) {
 
+		screen->fillSquare(n->pos[0], n->pos[1]);
 		evalSquare(n->pos[0], n->pos[1]);
 		n = n->n;
 	}
@@ -108,18 +109,21 @@ void GameOfLife::birth(int x, int y){
 		curr_alive->queue(pos);
 	}
 	curr_board->addPoint(x, y);
-	screen->fillSquare(x, y);
 }
 
 bool GameOfLife::getStatus(int x, int y){
 	return curr_board->checkPoint(x, y);
 }
 
+void GameOfLife::print_alive(){
+	std::cout << *curr_alive;
+}
+
 int main() {
 	GameOfLife* game = new GameOfLife();
-	game->birth(0,2);
 	game->birth(1,2);
 	game->birth(2,2);
+	game->birth(3,2);
 
 	/*
 	game->birth(7, 7);
@@ -149,13 +153,18 @@ int main() {
 	game->birth(12 - OFFSHIFT, 14 - OFFSHIFT);
 	game->birth(12 - OFFSHIFT, 10 - OFFSHIFT);
 	*/
-	//while (true) {
+	
+	// while (true) {
 	game->screen->draw();
-	for (int i = 0; i < 40; i++) {
+	for (int i = 0; i < 3; i++) {
+		printf("Alive: \n");
+		game->print_alive();
+		printf("\n----------------\n");
+		system("sleep 2");
 		game->tick();
 		game->screen->draw();
 		
-		usleep(100 * 1000);
+		//usleep(100 * 1000);
 	}
 	delete game;
 }

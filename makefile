@@ -15,7 +15,7 @@ OBJECTS = $(patsubst $(SOURCEDIR)/%.cpp, $(BUILDDIR)/%.o, $(SOURCES))
 
 .PHONY: all clean build clear $(BINARY)
 
-all: build
+all: $(BINARY)
 
 $(BINARY): 
 	$(CC) $(CFLAGS) $(LDFLAGS) $(SOURCES) -o $(BINARY) 
